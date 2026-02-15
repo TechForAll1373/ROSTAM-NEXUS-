@@ -10,7 +10,7 @@
         :root {
             --bg-primary: #02040a;
             --bg-secondary: #080c14;
-            --bg-card: rgba(10, 15, 22, 0.9);
+            --bg-card: rgba(10, 15, 22, 0.95);
             --accent-primary: #00f2c9;
             --accent-secondary: #00a8e8;
             --accent-tertiary: #ffbe0b;
@@ -33,7 +33,6 @@
         .font-display { font-family: 'Syne', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-        /* Background Effects */
         .bg-mesh {
             position: fixed; inset: 0;
             background: 
@@ -42,7 +41,6 @@
             pointer-events: none; z-index: 0;
         }
 
-        /* Header */
         header {
             position: relative; z-index: 10;
             text-align: center;
@@ -80,7 +78,6 @@
 
         .subtitle { color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem; letter-spacing: 0.15em; }
 
-        /* Controls */
         .control-panel {
             position: sticky; top: 0; z-index: 100;
             background: rgba(2, 4, 10, 0.98);
@@ -120,7 +117,6 @@
         }
         .filter-btn.active { background: var(--accent-tertiary); color: #000; border-color: var(--accent-tertiary); font-weight: 700; }
 
-        /* Main Layout */
         main.container {
             position: relative; z-index: 5;
             max-width: 1800px;
@@ -128,19 +124,16 @@
             padding: 1rem;
         }
 
-        /* Responsive Grid */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1rem;
         }
         
-        /* Special Grid for Repos */
         .repo-grid {
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
         }
 
-        /* Card Style */
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -179,6 +172,7 @@
         .tag.gold { background: rgba(255, 190, 11, 0.15); color: var(--accent-tertiary); }
         .tag.blue { background: rgba(0, 168, 232, 0.15); color: var(--accent-secondary); }
         .tag.pink { background: rgba(255, 0, 110, 0.15); color: #ff6e6e; }
+        .tag.purple { background: rgba(128, 0, 128, 0.15); color: #dda0dd; }
 
         .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-top: auto; }
         .btn {
@@ -203,7 +197,6 @@
         
         .btn-wide { grid-column: 1 / -1; }
 
-        /* Repo Card */
         .repo-card .repo-url {
             background: #000;
             padding: 0.5rem;
@@ -215,14 +208,12 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Loading Indicator */
         .loader {
             text-align: center; padding: 2rem; color: var(--text-muted);
             display: none;
         }
         .loader.active { display: block; }
 
-        /* Toast */
         #toast {
             visibility: hidden; min-width: 250px; background-color: #333; color: #fff;
             text-align: center; border-radius: 4px; padding: 16px;
@@ -260,13 +251,14 @@
 
     <div class="control-panel">
         <div class="control-inner">
-            <input type="text" class="search-input" id="searchBar" placeholder="Search thousands of apps...">
+            <input type="text" class="search-input" id="searchBar" placeholder="Search thousands of apps, browsers, tools...">
             <div class="filter-scroll" id="filterGroup">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="mobile">Android / iOS</button>
                 <button class="filter-btn" data-filter="desktop">Desktop</button>
                 <button class="filter-btn" data-filter="vpn">VPN / Proxy</button>
                 <button class="filter-btn" data-filter="msg">Messengers</button>
+                <button class="filter-btn" data-filter="browser">Browsers</button>
                 <button class="filter-btn" data-filter="fdroid">F-Droid Repos</button>
                 <button class="filter-btn" data-filter="arch">Arch Guide</button>
             </div>
@@ -293,10 +285,9 @@
             navigator.clipboard.writeText(url).then(() => showToast("Repo URL Copied!"));
         }
 
-        // --- DATABASE (EXPANDED) ---
-        // Note: 'release' points to GitHub Releases. 'play'/'appstore' points to store listings.
+        // --- DATABASE (EXPANDED & COMPREHENSIVE) ---
         const database = [
-            //--- V2RAY/PROXY SUBS ---
+            // --- V2RAY/PROXY SUBS ---
             { name: "Epodonios Configs", sub: "Subscription", desc: "Massive V2Ray configs collection.", tags: ["Sub", "Updated"], cat: ["vpn", "sub"], source: "https://github.com/Epodonios/v2ray-configs" },
             { name: "Barry-Far Config", sub: "Subscription", desc: "Organized V2Ray configs.", tags: ["Sub", "Clean"], cat: ["vpn", "sub"], source: "https://github.com/barry-far/V2ray-Config" },
             { name: "MatinGhanbari", sub: "Subscription", desc: "Subscription links for V2Ray.", tags: ["Sub", "IR"], cat: ["vpn", "sub"], source: "https://github.com/MatinGhanbari/v2ray-configs" },
@@ -304,8 +295,8 @@
             { name: "ALIILAPRO Config", sub: "Subscription", desc: "Specific for V2RayNG.", tags: ["Sub", "NG"], cat: ["vpn", "sub"], source: "https://github.com/ALIILAPRO/v2rayNG-Config" },
             { name: "Free V2Ray", sub: "Subscription", desc: "Free V2Ray configs.", tags: ["Sub", "Free"], cat: ["vpn", "sub"], source: "https://github.com/aiboboxx/v2rayfree" },
 
-            //--- MOBILE VPN ---
-            { name: "Hiddify", sub: "All Platform", desc: "Advanced Sing-box client.", tags: ["IR", "FOSS"], cat: ["mobile", "vpn"], release: "https://github.com/hiddify/hiddify-next/releases", play: "https://play.google.com/store/apps/details?id=app.hiddify.com", web: "https://hiddify.com" },
+            // --- MOBILE VPN ---
+            { name: "Hiddify", sub: "All Platform", desc: "Advanced Sing-box client.", tags: ["IR", "FOSS"], cat: ["mobile", "vpn"], release: "https://github.com/hiddify/hiddify-next/releases", play: "https://play.google.com/store/apps/details?id=app.hiddify.com", appstore: "https://apps.apple.com/us/app/hiddify/id1661177558", web: "https://hiddify.com" },
             { name: "MahsaNG", sub: "Android", desc: "Optimized V2RayNG for Iran.", tags: ["IR", "V2Ray"], cat: ["mobile", "vpn"], release: "https://github.com/GFW-knocker/MahsaNG/releases" },
             { name: "NikaNG", sub: "Android", desc: "V2RayNG Modification.", tags: ["IR", "V2Ray"], cat: ["mobile", "vpn"], release: "https://github.com/farhadvbg/NikaNG/releases" },
             { name: "v2rayNG", sub: "Android", desc: "Standard V2Ray client.", tags: ["Standard", "V2Ray"], cat: ["mobile", "vpn"], release: "https://github.com/2dust/v2rayNG/releases", play: "https://play.google.com/store/apps/details?id=com.v2ray.ang" },
@@ -320,18 +311,55 @@
             { name: "Psiphon", sub: "Mobile", desc: "Circumvention tool.", tags: ["Anti-Censorship"], cat: ["mobile", "vpn"], play: "https://play.google.com/store/apps/details?id=com.psiphon3", appstore: "https://apps.apple.com/us/app/psiphon/id1276264905", web: "https://psiphon.ca" },
             { name: "Lantern", sub: "Mobile", desc: "Open internet.", tags: ["P2P", "Proxy"], cat: ["mobile", "vpn"], play: "https://play.google.com/store/apps/details?id=org.getlantern.lantern", source: "https://github.com/getlantern/lantern" },
             { name: "Cloudflare WARP", sub: "Mobile", desc: "Secure connection.", tags: ["Warp", "CF"], cat: ["mobile", "vpn"], play: "https://play.google.com/store/apps/details?id=com.cloudflare.onedotoneonethree", appstore: "https://apps.apple.com/us/app/1-1-1-1-faster-internet/id1423538627" },
-            { name: "V2Box", sub: "iOS", desc: "V2Ray Client.", tags: ["iOS", "V2Ray"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/v2box/id6446814684", source: "https://github.com/warb312/V2Box" },
-            { name: "Shadowrocket", sub: "iOS", desc: "Rule-based proxy.", tags: ["iOS", "Premium"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/shadowrocket/id932747118" },
-            { name: "Streisand", sub: "iOS", desc: "Simple proxy.", tags: ["iOS", "Simple"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/streisand/id6459707007" },
-            { name: "Potatso", sub: "iOS", desc: "Proxy tool.", tags: ["iOS", "Proxy"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/potatso/id1070901416" },
-            { name: "IVPN", sub: "Mobile", desc: "Privacy focused VPN.", tags: ["Privacy", "Paid"], cat: ["mobile", "vpn"], play: "https://play.google.com/store/apps/details?id=net.ivpn.client", appstore: "https://apps.apple.com/us/app/ivpn-secure-vpn-for-privacy/id1193124667", web: "https://www.ivpn.net" },
-            { name: "Mullvad VPN", sub: "Mobile", desc: "Anonymous VPN.", tags: ["Anonymous", "Paid"], cat: ["mobile", "vpn"], play: "https://play.google.com/store/apps/details?id=net.mullvad.mullvadvpn", appstore: "https://apps.apple.com/us/app/mullvad-vpn/id1485824779", web: "https://mullvad.net" },
-            { name: "Windscribe", sub: "Mobile", desc: "Freemium VPN.", tags: ["Freemium", "Privacy"], cat: ["mobile", "vpn"], play: "https://play.google.com/store/apps/details?id=com.windscribe.vpn", appstore: "https://apps.apple.com/us/app/windscribe-vpn/id1126553776", web: "https://windscribe.com" },
-            { name: "TunnelBear", sub: "Mobile", desc: "Easy VPN.", tags: ["Easy", "Freemium"], cat: ["mobile", "vpn"], play: "https://play.google.com/store/apps/details?id=com.tunnelbear.android", appstore: "https://apps.apple.com/us/app/tunnelbear-vpn-wifi-proxy/id564542793", web: "https://www.tunnelbear.com" },
-            { name: "NordVPN", sub: "Mobile", desc: "Popular VPN.", tags: ["Popular", "Paid"], cat: ["mobile", "vpn"], play: "https://play.google.com/store/apps/details?id=com.nordvpn.android", appstore: "https://apps.apple.com/us/app/nordvpn-privacy-security/id905953485", web: "https://nordvpn.com" },
-            { name: "ExpressVPN", sub: "Mobile", desc: "Premium VPN.", tags: ["Premium", "Fast"], cat: ["mobile", "vpn"], play: "https://play.google.com/store/apps/details?id=com.expressvpn.vpn", appstore: "https://apps.apple.com/us/app/expressvpn-worlds-1-vpn/id1282452084", web: "https://www.expressvpn.com" },
+            
+            // --- iOS VPN (Exclusive) ---
+            { name: "Shadowrocket", sub: "iOS Proxy", desc: "Rule-based proxy utility.", tags: ["iOS", "Premium"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/shadowrocket/id932747118" },
+            { name: "Quantumult X", sub: "iOS Proxy", desc: "Advanced network analyzer/proxy.", tags: ["iOS", "Premium"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/quantumult-x/id1443930592" },
+            { name: "Stash", sub: "iOS Proxy", desc: "Rule-based proxy client.", tags: ["iOS", "Premium"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/stash-proxy-utility/id1596022984" },
+            { name: "Surge 5", sub: "iOS Proxy", desc: "Network toolbox.", tags: ["iOS", "Premium"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/surge-5/id1442620678" },
+            { name: "Loon", sub: "iOS Proxy", desc: "Network debugging tool.", tags: ["iOS", "Premium"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/loon/id1373567447" },
+            { name: "Egern", sub: "iOS Proxy", desc: "Modern proxy client.", tags: ["iOS", "Premium"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/egern/id1543256870" },
+            { name: "SingBox", sub: "iOS Proxy", desc: "Universal proxy platform.", tags: ["iOS", "FOSS"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/singbox/id6451272673", source: "https://github.com/SagerNet/sing-box" },
+            { name: "V2Box", sub: "iOS Proxy", desc: "V2Ray client.", tags: ["iOS", "FOSS"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/v2box/id6446814684", source: "https://github.com/warb312/V2Box" },
+            { name: "Potatso", sub: "iOS Proxy", desc: "Proxy tool.", tags: ["iOS", "Proxy"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/potatso/id1070901416" },
+            { name: "Kitsunebi", sub: "iOS Proxy", desc: "Proxy client.", tags: ["iOS", "Premium"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/kitsunebi-proxy-client/id1446584073" },
+            { name: "OneClick", sub: "iOS Proxy", desc: "Simple proxy client.", tags: ["iOS", "Free"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/oneclick/id1549036390" },
+            { name: "Streisand", sub: "iOS Proxy", desc: "Simple proxy.", tags: ["iOS", "Simple"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/streisand/id6459707007" },
+            { name: "Onion Browser", sub: "iOS Tor", desc: "Tor browser for iOS.", tags: ["Tor", "iOS"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/onion-browser/id519296448", source: "https://github.com/OnionBrowser/OnionBrowser" },
+            { name: "Red Onion", sub: "iOS Tor", desc: "Tor browser.", tags: ["Tor", "iOS"], cat: ["mobile", "vpn"], appstore: "https://apps.apple.com/us/app/red-onion-tor-browser/id998547973" },
+            { name: "Orion Browser", sub: "iOS WebKit", desc: "Firefox browser for iOS.", tags: ["Browser", "iOS"], cat: ["mobile", "browser"], appstore: "https://apps.apple.com/us/app/orion-browser-by-kagi/id1484494369", web: "https://browser.kagi.com" },
 
-            //--- APP STORES ---
+            // --- BROWSERS (Mobile & Desktop) ---
+            { name: "Google Chrome", sub: "Browser", desc: "Fast, secure browser.", tags: ["Web", "Sync"], cat: ["mobile", "desktop", "browser"], play: "https://play.google.com/store/apps/details?id=com.android.chrome", appstore: "https://apps.apple.com/us/app/google-chrome/id535886823", web: "https://www.google.com/chrome" },
+            { name: "Mozilla Firefox", sub: "Browser", desc: "Open source browser.", tags: ["FOSS", "Privacy"], cat: ["mobile", "desktop", "browser"], play: "https://play.google.com/store/apps/details?id=org.mozilla.firefox", appstore: "https://apps.apple.com/us/app/firefox-private-safe-browser/id989804926", web: "https://www.mozilla.org/firefox" },
+            { name: "Brave Browser", sub: "Browser", desc: "Privacy browser with ad block.", tags: ["Privacy", "AdBlock"], cat: ["mobile", "desktop", "browser"], play: "https://play.google.com/store/apps/details?id=com.brave.browser", appstore: "https://apps.apple.com/us/app/brave-private-web-browser/id1052879175", web: "https://brave.com" },
+            { name: "Microsoft Edge", sub: "Browser", desc: "Fast and secure browser.", tags: ["Web", "Microsoft"], cat: ["mobile", "desktop", "browser"], play: "https://play.google.com/store/apps/details?id=com.microsoft.emmx", appstore: "https://apps.apple.com/us/app/microsoft-edge/id1288723196", web: "https://www.microsoft.com/edge" },
+            { name: "Opera", sub: "Browser", desc: "Browser with free VPN.", tags: ["VPN", "Web"], cat: ["mobile", "desktop", "browser"], play: "https://play.google.com/store/apps/details?id=com.opera.browser", appstore: "https://apps.apple.com/us/app/opera-browser-fast-private/id363729560", web: "https://www.opera.com" },
+            { name: "Opera GX", sub: "Browser", desc: "Gaming browser.", tags: ["Gaming", "Desktop"], cat: ["desktop", "browser"], web: "https://www.opera.com/gx" },
+            { name: "Vivaldi", sub: "Browser", desc: "Highly customizable browser.", tags: ["Privacy", "Features"], cat: ["mobile", "desktop", "browser"], play: "https://play.google.com/store/apps/details?id=com.vivaldi.browser", appstore: "https://apps.apple.com/us/app/vivaldi-browser/id1510445891", web: "https://vivaldi.com" },
+            { name: "DuckDuckGo Browser", sub: "Browser", desc: "Privacy simplified.", tags: ["Privacy", "Search"], cat: ["mobile", "desktop", "browser"], play: "https://play.google.com/store/apps/details?id=com.duckduckgo.mobile.android", appstore: "https://apps.apple.com/us/app/duckduckgo-privacy-browser/id663592361", web: "https://duckduckgo.com/app" },
+            { name: "Tor Browser", sub: "Desktop", desc: "Anonymous browsing.", tags: ["Tor", "Anonymity"], cat: ["desktop", "browser"], web: "https://www.torproject.org/download/" },
+            { name: "Tor Browser Alpha", sub: "Android", desc: "Tor for Android.", tags: ["Tor", "Alpha"], cat: ["mobile", "browser"], play: "https://play.google.com/store/apps/details?id=org.torproject.torbrowser_alpha", web: "https://www.torproject.org" },
+            { name: "Safari", sub: "Apple Browser", desc: "Default Apple browser.", tags: ["Apple", "Web"], cat: ["mobile", "desktop", "browser"], appstore: "https://apps.apple.com/us/app/safari/id1146562112", web: "https://www.apple.com/safari" },
+            { name: "Bromite", sub: "Android Browser", desc: "Chromium with ad block.", tags: ["Privacy", "Chromium"], cat: ["mobile", "browser"], fdroid: "https://www.bromite.org/fdroid/repo", web: "https://www.bromite.org" },
+            { name: "Ungoogled Chromium", sub: "Desktop", desc: "Google-free Chromium.", tags: ["Privacy", "Chromium"], cat: ["desktop", "browser"], web: "https://ungoogled-software.github.io/ungoogled-chromium-binaries/" },
+            { name: "Kiwi Browser", sub: "Android Browser", desc: "Chromium with extensions.", tags: ["Extensions", "Web"], cat: ["mobile", "browser"], play: "https://play.google.com/store/apps/details?id=com.kiwibrowser.browser", source: "https://github.com/kiwibrowser/src" },
+            { name: "Yandex Browser", sub: "Browser", desc: "Russian browser.", tags: ["Web", "Secure"], cat: ["mobile", "desktop", "browser"], play: "https://play.google.com/store/apps/details?id=ru.yandex.searchplugin", web: "https://browser.yandex.com" },
+            { name: "Fennec F-Droid", sub: "Android Browser", desc: "Firefox F-Droid.", tags: ["FOSS", "Firefox"], cat: ["mobile", "browser"], fdroid: "https://f-droid.org/packages/org.mozilla.fennec_fdroid/" },
+            { name: "Mull Browser", sub: "Android Browser", desc: "Hardened Firefox.", tags: ["Privacy", "Hardened"], cat: ["mobile", "browser"], fdroid: "https://f-droid.org/packages/us.spotco.fennec_dos/" },
+            { name: "Iceraven", sub: "Android Browser", desc: "Fork of Firefox.", tags: ["FOSS", "Extensions"], cat: ["mobile", "browser"], fdroid: "https://f-droid.org/packages/io.github.forkmaintainers.iceraven/", source: "https://github.com/fork-maintainers/iceraven-browser" },
+            { name: "Waterfox", sub: "Desktop Browser", desc: "Firefox fork.", tags: ["Privacy", "FOSS"], cat: ["desktop", "browser"], web: "https://www.waterfox.net" },
+            { name: "LibreWolf", sub: "Desktop Browser", desc: "Hardened Firefox.", tags: ["Privacy", "Hardened"], cat: ["desktop", "browser"], web: "https://librewolf.net" },
+            { name: "Pale Moon", sub: "Desktop Browser", desc: "Optimized browser.", tags: ["Classic", "FOSS"], cat: ["desktop", "browser"], web: "https://www.palemoon.org" },
+            { name: "Epic Privacy Browser", sub: "Desktop Browser", desc: "Privacy focused.", tags: ["Privacy", "Encrypted"], cat: ["desktop", "browser"], web: "https://www.epicbrowser.com" },
+            { name: "Maxthon Browser", sub: "Browser", desc: "Cloud browser.", tags: ["Cloud", "Web"], cat: ["mobile", "desktop", "browser"], play: "https://play.google.com/store/apps/details?id=com.maxthon.browser", web: "https://www.maxthon.com" },
+            { name: "Puffin Browser", sub: "Browser", desc: "Fast cloud browser.", tags: ["Cloud", "Flash"], cat: ["mobile", "browser"], play: "https://play.google.com/store/apps/details?id=com.cloudmosa.puffinFree", appstore: "https://apps.apple.com/us/app/puffin-web-browser/id472937654" },
+            { name: "Aloha Browser", sub: "Browser", desc: "Browser with VPN.", tags: ["VPN", "Web"], cat: ["mobile", "browser"], play: "https://play.google.com/store/apps/details?id=com.aloha.browser", appstore: "https://apps.apple.com/us/app/aloha-browser-fast-vpn/id1105312980" },
+            { name: "CM Browser", sub: "Android Browser", desc: "Lightweight browser.", tags: ["Lightweight", "Secure"], cat: ["mobile", "browser"], play: "https://play.google.com/store/apps/details?id=com.ksmobile.cb" },
+            { name: "Via Browser", sub: "Android Browser", desc: "Mini browser.", tags: ["Mini", "Fast"], cat: ["mobile", "browser"], play: "https://play.google.com/store/apps/details?id=mark.via.gp", source: "https://github.com/tuyafeng/Via" },
+            { name: "XBrowser", sub: "Android Browser", desc: "Mini browser.", tags: ["Mini", "AdBlock"], cat: ["mobile", "browser"], play: "https://play.google.com/store/apps/details?id=mmbox.xbrowser" },
+
+            // --- APP STORES ---
             { name: "Aurora Store", sub: "Android", desc: "Play Store Client.", tags: ["Store", "Privacy"], cat: ["mobile", "store"], fdroid: "https://f-droid.org/en/packages/com.aurora.store/", release: "https://github.com/AuroraOSS/AuroraStore/releases" },
             { name: "Aurora Droid", sub: "Android", desc: "F-Droid Client.", tags: ["Store", "FOSS"], cat: ["mobile", "store"], fdroid: "https://f-droid.org/en/packages/com.aurora.adroid/", release: "https://github.com/AuroraOSS/AuroraDroid/releases" },
             { name: "Droid-ify", sub: "Android", desc: "Material F-Droid.", tags: ["Store", "Material"], cat: ["mobile", "store"], fdroid: "https://f-droid.org/packages/com.looker.droidify/", release: "https://github.com/Iamlooker/Droid-ify/releases" },
@@ -341,8 +369,10 @@
             { name: "APKPure", sub: "Web/Android", desc: "Alt App Store.", tags: ["Store", "APK"], cat: ["mobile", "store"], web: "https://apkpure.com", play: "https://play.google.com/store/apps/details?id=com.apkpure.aegon" },
             { name: "Aptoide", sub: "Android", desc: "Decentralized Store.", tags: ["Store", "Alt"], cat: ["mobile", "store"], play: "https://play.google.com/store/apps/details?id=cm.aptoide.pt", web: "https://aptoide.com" },
             { name: "Fossdroid", sub: "Web", desc: "FOSS Apps Web.", tags: ["Store", "Web"], cat: ["mobile", "store"], web: "https://fossdroid.com" },
+            { name: "APKMirror", sub: "Web", desc: "APK Repository.", tags: ["Store", "Mirror"], cat: ["mobile", "store"], web: "https://www.apkmirror.com" },
+            { name: "Uptodown", sub: "Web", desc: "Open App Store.", tags: ["Store", "Web"], cat: ["mobile", "store"], web: "https://uptodown.com" },
 
-            //--- ROOT & KERNEL ---
+            // --- ROOT & KERNEL ---
             { name: "Magisk", sub: "Root", desc: "Systemless Root.", tags: ["Root", "Systemless"], cat: ["mobile", "root"], release: "https://github.com/topjohnwu/Magisk/releases" },
             { name: "KernelSU", sub: "Root", desc: "Kernel Root.", tags: ["Root", "Kernel"], cat: ["mobile", "root"], release: "https://github.com/tiann/KernelSU/releases" },
             { name: "APatch", sub: "Root", desc: "Kernel Patcher.", tags: ["Root", "Patch"], cat: ["mobile", "root"], release: "https://github.com/bmax121/APatch/releases" },
@@ -353,8 +383,9 @@
             { name: "Shamiko", sub: "Module", desc: "Hide Root.", tags: ["Hide", "Zygisk"], cat: ["mobile", "root"], source: "https://github.com/LSPosed/zygisk-module-template" },
             { name: "Zygisk Detach", sub: "Module", desc: "Detach apps from Play.", tags: ["Module", "Detach"], cat: ["mobile", "root"], source: "https://github.com/j-hc/zygisk-detach" },
             { name: "Magisk Modules Manager", sub: "Manager", desc: "Fox's MMM.", tags: ["Manager", "Module"], cat: ["mobile", "root"], release: "https://github.com/Fox2Code/FoxMagiskModuleManager/releases" },
+            { name: "Busybox for Android", sub: "Binary", desc: "Busybox Installer.", tags: ["Tool", "Root"], cat: ["mobile", "root"], release: "https://github.com/Magisk-Modules-Alt-Repo/busybox-ndk/releases" },
 
-            //--- MESSENGERS ---
+            // --- MESSENGERS ---
             { name: "Signal", sub: "Messenger", desc: "Secure Messaging.", tags: ["E2E", "Secure"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms", appstore: "https://apps.apple.com/us/app/signal-private-messenger/id874139669", web: "https://signal.org" },
             { name: "Telegram", sub: "Messenger", desc: "Cloud Messaging.", tags: ["Cloud", "Fast"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=org.telegram.messenger", appstore: "https://apps.apple.com/us/app/telegram-messenger/id686449807", web: "https://telegram.org" },
             { name: "Telegram FOSS", sub: "Messenger", desc: "FOSS Telegram.", tags: ["FOSS", "Chat"], cat: ["mobile", "msg"], fdroid: "https://f-droid.org/packages/org.telegram.messenger/", source: "https://github.com/Telegram-FOSS-Team/Telegram-FOSS" },
@@ -373,14 +404,17 @@
             { name: "Status", sub: "Messenger", desc: "Web3 Messenger.", tags: ["Web3", "Crypto"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=im.status.ethereum", web: "https://status.im" },
             { name: "Utopia", sub: "Messenger", desc: "Decentralized Ecosystem.", tags: ["P2P", "Privacy"], cat: ["mobile", "msg"], web: "https://u.is" },
             { name: "Keybase", sub: "Messenger", desc: "Secure Chat & Files.", tags: ["Crypto", "Teams"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=com.keybase.keybase", appstore: "https://apps.apple.com/us/app/keybase-crypto-for-everyone/id1044461770", web: "https://keybase.io" },
-            { name: "Threema Work", sub: "Messenger", desc: "Business Secure Chat.", tags: ["Business", "Secure"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=ch.threema.work", web: "https://threema.ch" },
-            { name: "Wickr Me", sub: "Messenger", desc: "Encrypted Chat.", tags: ["E2E", "Self-Destruct"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=com.mywickr.wickr2", appstore: "https://apps.apple.com/us/app/wickr-me/id878494098", web: "https://wickr.com" }, // Note: Wickr Me is shutting down/changed, linking for archive purposes or check
-            { name: "Matrix.org", sub: "Protocol", desc: "Open Standard.", tags: ["Protocol", "Open"], cat: ["mobile", "msg"], web: "https://matrix.org" },
-            { name: "Riot.im (Legacy)", sub: "Matrix Client", desc: "Old Element.", tags: ["Matrix", "Old"], cat: ["mobile", "msg"], source: "https://github.com/vector-im/element-android" },
             { name: "SchildiChat", sub: "Matrix Client", desc: "Feature rich Element.", tags: ["Matrix", "UI"], cat: ["mobile", "msg"], release: "https://github.com/SchildiChat/schildichat-android/releases", web: "https://schildi.chat" },
             { name: "FluffyChat", sub: "Matrix Client", desc: "Cute Matrix Client.", tags: ["Matrix", "Cute"], cat: ["mobile", "msg"], fdroid: "https://f-droid.org/packages/chat.fluffy.fluffychat/", web: "https://fluffychat.im" },
+            { name: "Blabber.im", sub: "XMPP Client", desc: "XMPP Client.", tags: ["XMPP", "Chat"], cat: ["mobile", "msg"], fdroid: "https://f-droid.org/packages/de.pixart.messenger/", source: "https://codeberg.org/kriztan/Pix-Art-Messenger" },
+            { name: "Dino", sub: "XMPP Client", desc: "Modern XMPP Desktop.", tags: ["XMPP", "Desktop"], cat: ["desktop", "msg"], source: "https://github.com/dino/dino", web: "https://dino.im" },
+            { name: "WhatsApp", sub: "Messenger", desc: "Popular Messaging.", tags: ["Cloud", "E2E"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=com.whatsapp", appstore: "https://apps.apple.com/us/app/whatsapp-messenger/id310633997", web: "https://www.whatsapp.com" },
+            { name: "Viber", sub: "Messenger", desc: "Messaging App.", tags: ["VoIP", "Chat"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=com.viber.voip", appstore: "https://apps.apple.com/us/app/viber-messenger/id382617920", web: "https://www.viber.com" },
+            { name: "Line", sub: "Messenger", desc: "Messaging App.", tags: ["VoIP", "Chat"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=jp.naver.line.android", appstore: "https://apps.apple.com/us/app/line/id443904275", web: "https://line.me" },
+            { name: "WeChat", sub: "Messenger", desc: "Chinese Messaging.", tags: ["Social", "Payment"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=com.tencent.mm", appstore: "https://apps.apple.com/us/app/wechat/id414478124", web: "https://www.wechat.com" },
+            { name: "KakaoTalk", sub: "Messenger", desc: "Korean Messaging.", tags: ["VoIP", "Chat"], cat: ["mobile", "msg"], play: "https://play.google.com/store/apps/details?id=com.kakao.talk", appstore: "https://apps.apple.com/us/app/kakaotalk/id362057947", web: "https://www.kakaocorp.com/service/KakaoTalk" },
 
-            //--- MOBILE UTILITIES ---
+            // --- MOBILE UTILITIES ---
             { name: "Invizible Pro", sub: "Security", desc: "DNS/Firewall/Root Hide.", tags: ["Security", "Root"], cat: ["mobile", "util"], release: "https://github.com/MergedDark/InviziblePro/releases" },
             { name: "NetGuard", sub: "Firewall", desc: "No-root Firewall.", tags: ["Firewall", "Network"], cat: ["mobile", "util"], fdroid: "https://f-droid.org/packages/eu.faircode.netguard/", web: "https://netguard.me" },
             { name: "RethinkDNS", sub: "Firewall", desc: "DNS + Firewall.", tags: ["DNS", "Monitor"], cat: ["mobile", "util"], play: "https://play.google.com/store/apps/details?id=com.celzero.bravedns", web: "https://rethinkdns.com" },
@@ -433,7 +467,7 @@
             { name: "Ghost Commander", sub: "Files", desc: "Dual Panel File Manager.", tags: ["Files", "Dual"], cat: ["mobile", "util"], fdroid: "https://f-droid.org/packages/com.ghostsq.commander/" },
             { name: "F-Droid Build Status", sub: "Dev", desc: "Build Monitor.", tags: ["Dev", "FOSS"], cat: ["mobile", "util"], fdroid: "https://f-droid.org/packages/org.fdroid.fdroid.buildstatus/" },
 
-            //--- DESKTOP VPN ---
+            // --- DESKTOP VPN ---
             { name: "Hiddify Desktop", sub: "Cross-Platform", desc: "Sing-box Client.", tags: ["Desktop", "All-OS"], cat: ["desktop", "vpn"], release: "https://github.com/hiddify/hiddify-next/releases", web: "https://hiddify.com" },
             { name: "v2rayN", sub: "Windows", desc: "V2Ray Client.", tags: ["Windows", "V2Ray"], cat: ["desktop", "vpn"], release: "https://github.com/2dust/v2rayN/releases" },
             { name: "Nekoray", sub: "Desktop", desc: "Qt Proxy Client.", tags: ["Qt", "Cross-platform"], cat: ["desktop", "vpn"], release: "https://github.com/MatsuriDayo/nekoray/releases" },
@@ -452,8 +486,7 @@
             { name: "Viscosity", sub: "Desktop", desc: "OpenVPN Client.", tags: ["OpenVPN", "Mac"], cat: ["desktop", "vpn"], web: "https://www.sparklabs.com/viscosity/" },
             { name: "Tunnelblick", sub: "Mac", desc: "OpenVPN for Mac.", tags: ["OpenVPN", "Mac"], cat: ["desktop", "vpn"], source: "https://github.com/Tunnelblick/Tunnelblick", web: "https://tunnelblick.net" },
 
-            //--- DESKTOP UTILITIES ---
-            { name: "Tor Browser", sub: "Desktop", desc: "Anonymous Browsing.", tags: ["Tor", "Browser"], cat: ["desktop", "util"], web: "https://www.torproject.org/download/" },
+            // --- DESKTOP UTILITIES ---
             { name: "KeePassXC", sub: "Desktop", desc: "Password Manager.", tags: ["Password", "Offline"], cat: ["desktop", "util"], release: "https://github.com/keepassxreboot/keepassxc/releases", web: "https://keepassxc.org" },
             { name: "Bitwarden Desktop", sub: "Desktop", desc: "Password Manager.", tags: ["Password", "Cloud"], cat: ["desktop", "util"], web: "https://bitwarden.com/download/" },
             { name: "KeePass", sub: "Desktop", desc: "Original Keepass.", tags: ["Password", "Windows"], cat: ["desktop", "util"], web: "https://keepass.info" },
@@ -485,7 +518,6 @@
             { name: "Git", sub: "Dev", desc: "Version Control.", tags: ["Git", "Dev"], cat: ["desktop", "util"], web: "https://git-scm.com/downloads" },
             { name: "Docker Desktop", sub: "Dev", desc: "Containerization.", tags: ["Docker", "Container"], cat: ["desktop", "util"], web: "https://www.docker.com/products/docker-desktop" },
             { name: "VirtualBox", sub: "VM", desc: "Virtual Machine.", tags: ["VM", "Oracle"], cat: ["desktop", "util"], web: "https://www.virtualbox.org/wiki/Downloads" },
-            { name: "VLC", sub: "Media", desc: "Media Player.", tags: ["Media", "Player"], cat: ["desktop", "util"], web: "https://www.videolan.org/vlc/" },
             { name: "Deluge", sub: "Torrent", desc: "BitTorrent Client.", tags: ["Torrent", "FOSS"], cat: ["desktop", "util"], web: "https://deluge-torrent.org/download/" },
             { name: "qBittorrent", sub: "Torrent", desc: "BitTorrent Client.", tags: ["Torrent", "FOSS"], cat: ["desktop", "util"], web: "https://www.qbittorrent.org/download.php" },
             { name: "Transmission", sub: "Torrent", desc: "BitTorrent Client.", tags: ["Torrent", "Lightweight"], cat: ["desktop", "util"], web: "https://transmissionbt.com/download/" },
@@ -513,7 +545,6 @@
             { name: "Session Desktop", sub: "Messengers", desc: "Anonymous Chat.", tags: ["Onion", "No-ID"], cat: ["desktop", "msg"], release: "https://github.com/oxen-io/session-desktop/releases", web: "https://getsession.org/download" },
             { name: "Wire Desktop", sub: "Messengers", desc: "Secure Chat.", tags: ["Business", "E2E"], cat: ["desktop", "msg"], source: "https://github.com/wireapp/wire-desktop", web: "https://wire.com/en/download/" },
             { name: "Briar Desktop", sub: "Messengers", desc: "P2P Chat.", tags: ["P2P", "Tor"], cat: ["desktop", "msg"], source: "https://code.briarproject.org/briar/briar-desktop" },
-            { name: "VSCodium", sub: "Editor", desc: "VS Code FOSS.", tags: ["Editor", "FOSS"], cat: ["desktop", "util"], release: "https://github.com/VSCodium/vscodium/releases", web: "https://vscodium.com" },
         ];
 
         const fdroidRepos = [
@@ -531,7 +562,10 @@
             { name: "GrapheneOS", url: "https://grapheneos.org/fdroid/repo", desc: "GrapheneOS Apps." },
             { name: "DivestOS", url: "https://divestos.org/fdroid/official", desc: "DivestOS Apps." },
             { name: "Nethunter", url: "https://store.nethunter.com/repo", desc: "Kali Nethunter." },
-            { name: "XPosed", url: "https://dl-xposed.xposed.info/repo", desc: "XPosed Framework." }
+            { name: "XPosed", url: "https://dl-xposed.xposed.info/repo", desc: "XPosed Framework." },
+            { name: "F-Droid Archive", url: "https://f-droid.org/archive", desc: "Old Versions." },
+            { name: "OE-all", url: "https://oe-all.net/fdroid/repo", desc: "OE-All Apps." },
+            { name: "Guroo", url: "https://fdroid.guroo.win/fdroid/repo", desc: "Guroo Apps." }
         ];
 
         const archGuide = `
@@ -596,7 +630,7 @@ systemctl enable --now waydroid-container.service</div>
         
         let activeFilter = 'all';
         let displayedCount = 0;
-        const itemsPerPage = 50; // Load 50 items at a time
+        const itemsPerPage = 50;
         let currentList = [];
 
         function createCard(item) {
@@ -608,6 +642,7 @@ systemctl enable --now waydroid-container.service</div>
                 if(item.cat.includes('vpn')) cls = 'gold';
                 if(item.cat.includes('msg')) cls = 'blue';
                 if(item.cat.includes('root')) cls = 'pink';
+                if(item.cat.includes('browser')) cls = 'purple';
                 return `<span class="tag ${cls}">${t}</span>`;
             }).join('');
 
@@ -655,7 +690,6 @@ systemctl enable --now waydroid-container.service</div>
 
         function loadMore() {
             loader.classList.add('active');
-            // Simulate slight delay for smoothness
             setTimeout(() => {
                 const fragment = document.createDocumentFragment();
                 const end = Math.min(displayedCount + itemsPerPage, currentList.length);
@@ -683,7 +717,6 @@ systemctl enable --now waydroid-container.service</div>
             
             const q = searchBar.value.toLowerCase().trim();
 
-            // Handle Arch Guide
             if (activeFilter === 'arch') {
                 gridContainer.className = 'tools-grid';
                 gridContainer.innerHTML = archGuide;
@@ -691,7 +724,6 @@ systemctl enable --now waydroid-container.service</div>
                 return;
             }
 
-            // Handle F-Droid Repos
             if (activeFilter === 'fdroid') {
                 gridContainer.className = 'tools-grid repo-grid';
                 currentList = fdroidRepos;
@@ -701,15 +733,12 @@ systemctl enable --now waydroid-container.service</div>
 
             gridContainer.className = 'tools-grid';
             
-            // Filter Logic
             if (activeFilter === 'all') {
-                currentList = database.filter(i => !i.cat.includes('sub')); // Exclude subs from 'All' to keep it clean, or include: currentList = database;
-                currentList = database; // Show all
+                currentList = database;
             } else {
                 currentList = database.filter(i => i.cat.includes(activeFilter));
             }
 
-            // Search Logic
             if (q) {
                 currentList = currentList.filter(i => 
                     i.name.toLowerCase().includes(q) || 
@@ -722,7 +751,6 @@ systemctl enable --now waydroid-container.service</div>
             loadMore();
         }
 
-        // Infinite Scroll Listener
         window.addEventListener('scroll', () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
                 if (displayedCount < currentList.length) {
@@ -731,7 +759,6 @@ systemctl enable --now waydroid-container.service</div>
             }
         });
 
-        // Event Listeners
         let searchTimeout;
         searchBar.addEventListener('input', () => {
             clearTimeout(searchTimeout);
@@ -747,7 +774,6 @@ systemctl enable --now waydroid-container.service</div>
             }
         });
 
-        // Init
         processFilter();
 
     </script>
